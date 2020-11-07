@@ -11,8 +11,11 @@ web-build/
 node_modules
 .vscode
 .expo-shared
+.expo
+debug.log
 
 # macOS
 .DS_Store
 node_modules
 .vscode
+.expo
