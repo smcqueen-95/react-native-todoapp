@@ -50,11 +50,11 @@ export default tempData = [
         ]
     },
     {
-        name: "Birthday party",
+        name: "Birthday Party",
         color: "#595BD9",
         todos: [
             {
-                title: "get balloons",
+                title: "Get balloons",
                 completed: false
             },
             {
