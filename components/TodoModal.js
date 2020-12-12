@@ -8,10 +8,12 @@ import {
   FlatList,
   KeyboardAvoidingView,
   TextInput,
-  Keyboard
+  Keyboard,
+  Animated
 } from "react-native";
 import { AntDesign, Ionicons } from "@expo/vector-icons";
 import colors from "../Colors";
+import {Swipeable} from 'react-native-gesture-handler'
 
 export default class TodoModal extends React.Component {
   state = {
@@ -39,6 +41,7 @@ export default class TodoModal extends React.Component {
 
   renderTodo = (todo, index) => {
     return (
+      <Swipeable renderRightActions={(_, dragX) => this.rightActions(dragX, index)}>
       <View style={styles.todoContainer}>
         <TouchableOpacity onPress={() => this.toggleTodoCompleted(index)}>
           <Ionicons
@@ -61,8 +64,27 @@ export default class TodoModal extends React.Component {
           {todo.title}
         </Text>
       </View>
+      </Swipeable>
     );
   };
+
+  rightActions = (dragX, index) => {
+    
+    const opacity = dragX.interpolate({
+      inputRange: [-100, -20, 0],
+      outputRange: [1, 0.9, 0],
+      extrapolate: 'clamp'
+    })
+    return (
+      <TouchableOpacity>
+        <Animated.View style={[styles.deleteButton, {opacity: opacity}]}>
+          <Animated.Text style={{color: colors.white, fontWeight: '800'}}>
+            Delete
+          </Animated.Text>
+        </Animated.View>
+      </TouchableOpacity>
+    )
+  }
 
   render() {
     const list = this.props.list;
@@ -102,15 +124,11 @@ export default class TodoModal extends React.Component {
             </View>
           </View>
 
-          <View style={[styles.section, { flex: 3 }]}>
+          <View style={[styles.section, { flex: 3, marginVertical: 16 }]}>
             <FlatList
               data={list.todos}
               renderItem={({ item, index }) => this.renderTodo(item, index)}
-              keyExtractor={(item) => item.title}
-              contentContainerStyle={{
-                paddingHorizontal: 32,
-                paddingVertical: 20,
-              }}
+              keyExtractor={(_, index) => index.toString()}
               showsVerticalScrollIndicator={false}
             />
           </View>
@@ -141,13 +159,13 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   section: {
-    flex: 1,
     alignSelf: "stretch",
   },
   header: {
     justifyContent: "flex-end",
     marginLeft: 64,
     borderBottomWidth: 3,
+    paddingTop: 16
   },
   title: {
     fontSize: 30,
@@ -164,6 +182,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 32,
     flexDirection: "row",
     alignItems: "center",
+    paddingVertical: 16
   },
   input: {
     flex: 1,
@@ -183,10 +202,18 @@ const styles = StyleSheet.create({
     paddingVertical: 8,
     flexDirection: "row",
     alignItems: "center",
+    paddingLeft: 32
   },
   todo: {
     color: colors.black,
     fontWeight: "700",
     fontSize: 16,
   },
+  deleteButton: {
+    flex: 1,
+    backgroundColor: colors.red,
+    justifyContent: 'center',
+    alignItems: 'center',
+    width: 80
+    }
 });
