@@ -1,19 +1,34 @@
 # React Native Todo App
-## About the Author
+
+# About the Author
 Name: Samira Mc Queen
 [LinkedIn](https://www.linkedin.com/in/samira-mc-queen-1882431a7/)
 
 Free Spririted Caribbean Woman.
 Software Developer and aspiring Game Developer
 
-### Project 
+# Project 
 ![Video](assets/todo-app.gif)
 
 ## Experience with Project
 - Creating this project was exciting. It was my first time using React Native
 - Firebase is used as the database, this gave me a chance to learn more about Firebase and it's features
 
-## Project setup
+# Application Features
+- User can craete a new list for tasks
+- User can give that list a color that is provided
+- User can add tasks to that specific list
+- User can mark complete on tasks
+- The user gets to see how many tasks are completed/incomplete in each list
+
+# Frontend Built With
+- React Native
+- Expo
+
+# Backend Built With
+- Firebase Firestore Storage
+
+# Project setup
 Once the project is downloaded locally on your device do the following:
 `
 npm install
