@@ -28,7 +28,7 @@ Software Developer and aspiring Game Developer
 # Backend Built With
 - Firebase Firestore Storage
 
-# Project setup
+# Project Setup
 Once the project is downloaded locally on your device do the following:
 `
 npm install
